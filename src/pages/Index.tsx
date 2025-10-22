@@ -26,6 +26,16 @@ import {
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-professionals.jpg";
 
+// US-only target: full state list (including DC)
+const US_STATES = [
+  "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia",
+  "Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine",
+  "Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada",
+  "New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon",
+  "Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia",
+  "Washington","West Virginia","Wisconsin","Wyoming"
+];
+
 // ---------------------------------------------
 // Landing page with Customer/Professional views
 // Keep theme/colors; adds a top toggle & tailored sections
@@ -87,13 +97,12 @@ const Index: React.FC = () => {
                 <div className="grid md:grid-cols-3 gap-4">
                   <Select>
                     <SelectTrigger className="bg-background">
-                      <SelectValue placeholder="Select City" />
+                      <SelectValue placeholder="Select State" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="karachi">Karachi</SelectItem>
-                      <SelectItem value="lahore">Lahore</SelectItem>
-                      <SelectItem value="islamabad">Islamabad</SelectItem>
-                      <SelectItem value="rawalpindi">Rawalpindi</SelectItem>
+                      {US_STATES.map((s) => (
+                        <SelectItem key={s} value={s.toLowerCase().replaceAll(' ', '-')}>{s}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 
@@ -287,7 +296,7 @@ const ProSections: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-6">
             <PricingCard
               title="Monthly"
-              price="PKR 2,999"
+              price="$20"
               subtitle="Billed monthly"
               features={[
                 "Verified profile & listing",
@@ -301,7 +310,7 @@ const ProSections: React.FC = () => {
             />
             <PricingCard
               title="Yearly"
-              price="PKR 29,999"
+              price="$150"
               subtitle="Best value — 2 months free"
               features={[
                 "All Monthly features",
